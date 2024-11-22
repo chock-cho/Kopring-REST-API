@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 12345
 
 spring:
   h2:
@@ -13,20 +13,33 @@ spring:
     password: user
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQLDialect
     open-in-view: false
   mvc:
-    problemdetails:
+    problem details:
       enabled: true
+    path match:
+      matching-strategy: ant_path_matcher
   docker:
     compose:
       file: ./docker/docker-compose.yml
       lifecycle-management: start_only
-
-infcon:
-  location: coex
-  date: 2023-08-15
-  url: https://inflearn.com/conf/infcon-2023
+  springdoc:
+    default-consumes-media-type: application/json
+    default-produces-media-type: application/json
+    swagger-ui:
+      enabled: true
+      tags-sorter: alpha
+      server: http://localhost:12345/
+      path: /swagger-ui.html
+    api-docs:
+      enabled: true
+      path: /v3/api-docs
+  server:
+    servlet:
+      context-path: /
+      encoding:
+        force: true
