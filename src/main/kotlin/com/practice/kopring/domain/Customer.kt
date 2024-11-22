@@ -1,5 +1,6 @@
 package com.practice.kopring.domain;
 
+import com.practice.kopring.api.request.CustomerUpdateRequest
 import jakarta.persistence.*
 import java.time.LocalDate
 import java.time.Period
@@ -32,4 +33,11 @@ class Customer(
 
     val fullName: String
         get() = "$firstName $lastName"
+
+    fun update(req: CustomerUpdateRequest) {
+        firstName = req.firstName
+        lastName = req.lastName
+        gender = req.gender
+        birthDate = req.birthDate
+    }
 }
